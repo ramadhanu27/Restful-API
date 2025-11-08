@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Copy - Komiku API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl font-bold mb-2 text-indigo-600">
+                <i class="fas fa-copy"></i> Quick Copy API Endpoints
+            </h1>
+            <p class="text-gray-600 mb-6">Klik untuk copy URL endpoint ke clipboard</p>
+
+            <div class="space-y-3">
+                <!-- Base URL -->
+                <div class="flex items-center gap-2 p-3 bg-indigo-50 rounded-lg border-2 border-indigo-200">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-indigo-600 mb-1">BASE URL</div>
+                        <code class="text-sm">http://localhost:3000/api</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api')" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <!-- All Manhwa -->
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border hover:border-indigo-300 transition">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-gray-600 mb-1">GET ALL MANHWA</div>
+                        <code class="text-sm">http://localhost:3000/api/manhwa?page=1&limit=20</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api/manhwa?page=1&limit=20')" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- Latest Manhwa -->
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border hover:border-indigo-300 transition">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-gray-600 mb-1">GET LATEST MANHWA</div>
+                        <code class="text-sm">http://localhost:3000/api/manhwa/latest?limit=10</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api/manhwa/latest?limit=10')" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- Manhwa Detail -->
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border hover:border-indigo-300 transition">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-gray-600 mb-1">GET MANHWA DETAIL</div>
+                        <code class="text-sm">http://localhost:3000/api/manhwa/:id</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api/manhwa/:id')" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- Chapters -->
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border hover:border-indigo-300 transition">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-gray-600 mb-1">GET CHAPTERS</div>
+                        <code class="text-sm">http://localhost:3000/api/chapters/:manhwaId?page=1&limit=50</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api/chapters/:manhwaId?page=1&limit=50')" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- Chapter Detail -->
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border hover:border-indigo-300 transition">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-gray-600 mb-1">GET CHAPTER DETAIL</div>
+                        <code class="text-sm">http://localhost:3000/api/chapters/:manhwaId/:chapterId</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api/chapters/:manhwaId/:chapterId')" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- Search -->
+                <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border hover:border-indigo-300 transition">
+                    <div class="flex-1">
+                        <div class="text-xs font-semibold text-gray-600 mb-1">SEARCH MANHWA</div>
+                        <code class="text-sm">http://localhost:3000/api/search?q=keyword</code>
+                    </div>
+                    <button onclick="copy('http://localhost:3000/api/search?q=keyword')" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom URL Builder -->
+            <div class="mt-8 p-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border-2 border-indigo-200">
+                <h2 class="text-xl font-bold mb-4 text-indigo-700">
+                    <i class="fas fa-tools"></i> Custom URL Builder
+                </h2>
+                
+                <div class="space-y-4">
+                    <!-- Manhwa Detail Builder -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Get Manhwa Detail by ID:</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="custom-id" placeholder="Masukkan ID manhwa..." class="flex-1 px-4 py-2 border rounded-lg">
+                            <button onclick="copyCustom('manhwa')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                                <i class="fas fa-copy"></i> Copy URL
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Search Builder -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Search Manhwa:</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="custom-search" placeholder="Masukkan kata kunci..." class="flex-1 px-4 py-2 border rounded-lg">
+                            <button onclick="copyCustom('search')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                                <i class="fas fa-copy"></i> Copy URL
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pagination Builder -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Get All Manhwa (Custom Pagination):</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="custom-page" placeholder="Page" value="1" class="w-24 px-4 py-2 border rounded-lg">
+                            <input type="number" id="custom-limit" placeholder="Limit" value="20" class="w-24 px-4 py-2 border rounded-lg">
+                            <button onclick="copyCustom('pagination')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex-1">
+                                <i class="fas fa-copy"></i> Copy URL
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div id="toast" class="fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden items-center gap-2">
+                <i class="fas fa-check-circle"></i>
+                <span>URL copied to clipboard!</span>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-8 flex gap-4 justify-center">
+                <a href="index.html" class="px-6 py-3 bg-white border-2 border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition font-semibold">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="api-docs.html" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-semibold">
+                    <i class="fas fa-book"></i> Full Documentation
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copy(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        function copyCustom(type) {
+            let url = '';
+            
+            if (type === 'manhwa') {
+                const id = document.getElementById('custom-id').value.trim();
+                if (!id) {
+                    alert('Please enter manhwa ID');
+                    return;
+                }
+                url = `http://localhost:3000/api/manhwa/${encodeURIComponent(id)}`;
+            } else if (type === 'search') {
+                const query = document.getElementById('custom-search').value.trim();
+                if (!query) {
+                    alert('Please enter search keyword');
+                    return;
+                }
+                url = `http://localhost:3000/api/search?q=${encodeURIComponent(query)}`;
+            } else if (type === 'pagination') {
+                const page = document.getElementById('custom-page').value || 1;
+                const limit = document.getElementById('custom-limit').value || 20;
+                url = `http://localhost:3000/api/manhwa?page=${page}&limit=${limit}`;
+            }
+            
+            copy(url);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

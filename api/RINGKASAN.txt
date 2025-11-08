@@ -1,0 +1,173 @@
+╔═══════════════════════════════════════════════════════════════╗
+║           KOMIKU REST API - WEB INTERFACE                     ║
+║                  Fitur Copy API URL                           ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📁 STRUKTUR FOLDER:
+api/
+├── server.js                      # Server utama
+├── routes/                        # API routes
+├── controllers/                   # API logic
+├── public/                        # Web interface
+│   ├── index.html                # Halaman utama (tampilan data)
+│   ├── api-docs.html             # Dokumentasi API lengkap + copy
+│   ├── quick-copy.html           # Quick copy endpoints (REKOMENDASI!)
+│   ├── app.js                    # JavaScript untuk index.html
+│   └── config.js                 # Konfigurasi API
+└── README.md                      # Dokumentasi lengkap
+
+═══════════════════════════════════════════════════════════════
+
+🚀 CARA MENJALANKAN:
+
+1. Install dependencies (sekali saja):
+   npm install
+
+2. Jalankan server:
+   npm run api
+   
+   ATAU double-click: start-api.bat
+
+3. Buka browser:
+   http://localhost:3000
+
+═══════════════════════════════════════════════════════════════
+
+🎯 FITUR UTAMA - COPY API URL:
+
+┌─────────────────────────────────────────────────────────────┐
+│ 1. QUICK COPY (PALING MUDAH!)                              │
+│    URL: http://localhost:3000/quick-copy.html              │
+│                                                             │
+│    ✓ Klik langsung untuk copy URL endpoint                │
+│    ✓ Custom URL builder untuk buat URL dinamis            │
+│    ✓ Toast notification saat berhasil copy                │
+│    ✓ Tampilan simple dan cepat                            │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ 2. API DOCUMENTATION                                        │
+│    URL: http://localhost:3000/api-docs.html                │
+│                                                             │
+│    ✓ Dokumentasi lengkap setiap endpoint                  │
+│    ✓ Tombol copy di setiap endpoint                       │
+│    ✓ Test endpoint langsung dari browser                  │
+│    ✓ Copy JSON response                                   │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ 3. MAIN INTERFACE                                           │
+│    URL: http://localhost:3000                              │
+│                                                             │
+│    ✓ Tampilan data manhwa                                 │
+│    ✓ Search, filter, pagination                           │
+│    ✓ Detail modal                                         │
+└─────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+
+📋 DAFTAR API ENDPOINTS:
+
+BASE URL: http://localhost:3000/api
+
+1. GET /manhwa?page=1&limit=20
+   → Semua manhwa dengan pagination
+
+2. GET /manhwa/latest?limit=10
+   → Manhwa update terbaru
+
+3. GET /manhwa/:id
+   → Detail manhwa berdasarkan ID
+
+4. GET /chapters/:manhwaId?page=1&limit=50
+   → Semua chapter dari manhwa
+
+5. GET /chapters/:manhwaId/:chapterId
+   → Detail chapter spesifik
+
+6. GET /search?q=keyword
+   → Search manhwa
+
+═══════════════════════════════════════════════════════════════
+
+💡 CARA COPY API URL:
+
+METODE 1 - Quick Copy (Tercepat):
+1. Buka: http://localhost:3000/quick-copy.html
+2. Klik tombol "Copy" di endpoint yang diinginkan
+3. URL langsung tersalin ke clipboard
+4. Paste di Postman/Thunder Client/aplikasi Anda
+
+METODE 2 - Custom URL Builder:
+1. Buka: http://localhost:3000/quick-copy.html
+2. Scroll ke bagian "Custom URL Builder"
+3. Masukkan parameter (ID, keyword, page, dll)
+4. Klik "Copy URL"
+5. URL custom langsung tersalin
+
+METODE 3 - API Docs (Dengan Test):
+1. Buka: http://localhost:3000/api-docs.html
+2. Klik "Copy" di endpoint yang diinginkan
+3. Atau klik "Test Endpoint" untuk coba langsung
+4. Copy JSON response jika perlu
+
+═══════════════════════════════════════════════════════════════
+
+🔧 INTEGRASI KE APLIKASI:
+
+JavaScript/Node.js:
+```javascript
+const response = await fetch('http://localhost:3000/api/manhwa/latest?limit=10');
+const data = await response.json();
+```
+
+Python:
+```python
+import requests
+response = requests.get('http://localhost:3000/api/manhwa/latest?limit=10')
+data = response.json()
+```
+
+PHP:
+```php
+$response = file_get_contents('http://localhost:3000/api/manhwa/latest?limit=10');
+$data = json_decode($response, true);
+```
+
+═══════════════════════════════════════════════════════════════
+
+📱 AKSES DARI PERANGKAT LAIN:
+
+1. Cek IP komputer: ipconfig
+2. Akses dari HP/laptop lain:
+   http://192.168.x.x:3000
+   (Ganti dengan IP komputer Anda)
+
+═══════════════════════════════════════════════════════════════
+
+❓ TROUBLESHOOTING:
+
+Q: Port 3000 sudah digunakan?
+A: Matikan server lama (Ctrl+C) atau ubah PORT di .env
+
+Q: Copy tidak berfungsi?
+A: Gunakan browser modern (Chrome/Firefox/Edge)
+
+Q: API tidak ada data?
+A: Pastikan file metadata ada di public/metadata/
+
+═══════════════════════════════════════════════════════════════
+
+📞 FILE BANTUAN:
+
+- README.md          → Dokumentasi lengkap API
+- CARA_PAKAI.md      → Panduan lengkap penggunaan
+- RINGKASAN.txt      → File ini (ringkasan cepat)
+
+═══════════════════════════════════════════════════════════════
+
+✅ SELESAI! Server siap digunakan.
+
+Akses: http://localhost:3000
+Quick Copy: http://localhost:3000/quick-copy.html
+API Docs: http://localhost:3000/api-docs.html

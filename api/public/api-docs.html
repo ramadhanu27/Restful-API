@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komiku API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+        .copied {
+            background: #10b981 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-indigo-600">
+                        <i class="fas fa-book-open"></i> Komiku API Docs
+                    </h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-indigo-50 transition">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="api-docs.html" class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg font-semibold">
+                        <i class="fas fa-code"></i> API Docs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg p-8 mb-8">
+            <h1 class="text-4xl font-bold mb-4">Komiku REST API Documentation</h1>
+            <p class="text-lg opacity-90">API untuk mengakses data manhwa dari Komiku. Klik tombol copy untuk menyalin URL endpoint.</p>
+            <div class="mt-4 flex items-center gap-4">
+                <div class="bg-white/20 px-4 py-2 rounded-lg">
+                    <span class="text-sm">Base URL:</span>
+                    <code class="ml-2 font-mono font-bold" id="base-url">http://localhost:3000/api</code>
+                </div>
+                <button onclick="copyToClipboard('http://localhost:3000/api', this)" class="px-4 py-2 bg-white text-indigo-600 rounded-lg hover:bg-gray-100 transition font-semibold">
+                    <i class="fas fa-copy"></i> Copy Base URL
+                </button>
+            </div>
+        </div>
+
+        <!-- Endpoints -->
+        <div class="space-y-6">
+            <!-- 1. Get All Manhwa -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded text-sm font-mono mr-2">GET</span>
+                            Get All Manhwa
+                        </h2>
+                        <p class="text-gray-600">Mendapatkan daftar semua manhwa dengan pagination</p>
+                    </div>
+                </div>
+                
+                <div class="code-block p-4 mb-4">
+                    <button onclick="copyToClipboard('http://localhost:3000/api/manhwa?page=1&limit=20', this)" class="copy-btn px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <code class="font-mono">GET http://localhost:3000/api/manhwa?page=1&limit=20</code>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-semibold mb-2">Query Parameters:</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">page</code>
+                            <span class="text-gray-600">(optional) - Halaman yang ingin diakses (default: 1)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">limit</code>
+                            <span class="text-gray-600">(optional) - Jumlah data per halaman (default: 20)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="testEndpoint('/manhwa?page=1&limit=5')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    <i class="fas fa-play"></i> Test Endpoint
+                </button>
+            </div>
+
+            <!-- 2. Get Latest Manhwa -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded text-sm font-mono mr-2">GET</span>
+                            Get Latest Manhwa
+                        </h2>
+                        <p class="text-gray-600">Mendapatkan manhwa dengan update terbaru</p>
+                    </div>
+                </div>
+                
+                <div class="code-block p-4 mb-4">
+                    <button onclick="copyToClipboard('http://localhost:3000/api/manhwa/latest?limit=10', this)" class="copy-btn px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <code class="font-mono">GET http://localhost:3000/api/manhwa/latest?limit=10</code>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-semibold mb-2">Query Parameters:</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">limit</code>
+                            <span class="text-gray-600">(optional) - Jumlah data yang ingin ditampilkan (default: 10)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="testEndpoint('/manhwa/latest?limit=5')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    <i class="fas fa-play"></i> Test Endpoint
+                </button>
+            </div>
+
+            <!-- 3. Get Manhwa Detail -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded text-sm font-mono mr-2">GET</span>
+                            Get Manhwa Detail
+                        </h2>
+                        <p class="text-gray-600">Mendapatkan detail manhwa berdasarkan ID</p>
+                    </div>
+                </div>
+                
+                <div class="code-block p-4 mb-4">
+                    <button onclick="copyToClipboard('http://localhost:3000/api/manhwa/:id', this)" class="copy-btn px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <code class="font-mono">GET http://localhost:3000/api/manhwa/:id</code>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-semibold mb-2">Path Parameters:</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">id</code>
+                            <span class="text-gray-600">(required) - ID atau title manhwa</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex gap-2 items-center mb-4">
+                    <input type="text" id="manhwa-id" placeholder="Masukkan ID manhwa..." class="flex-1 px-4 py-2 border rounded-lg">
+                    <button onclick="testManhwaDetail()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                        <i class="fas fa-play"></i> Test
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. Get Chapters by Manhwa -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded text-sm font-mono mr-2">GET</span>
+                            Get Chapters by Manhwa
+                        </h2>
+                        <p class="text-gray-600">Mendapatkan semua chapter dari manhwa tertentu</p>
+                    </div>
+                </div>
+                
+                <div class="code-block p-4 mb-4">
+                    <button onclick="copyToClipboard('http://localhost:3000/api/chapters/:manhwaId?page=1&limit=50', this)" class="copy-btn px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <code class="font-mono">GET http://localhost:3000/api/chapters/:manhwaId?page=1&limit=50</code>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-semibold mb-2">Parameters:</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">manhwaId</code>
+                            <span class="text-gray-600">(required) - ID manhwa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">page</code>
+                            <span class="text-gray-600">(optional) - Halaman (default: 1)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">limit</code>
+                            <span class="text-gray-600">(optional) - Jumlah per halaman (default: 50)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Search Manhwa -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded text-sm font-mono mr-2">GET</span>
+                            Search Manhwa
+                        </h2>
+                        <p class="text-gray-600">Mencari manhwa berdasarkan judul atau genre</p>
+                    </div>
+                </div>
+                
+                <div class="code-block p-4 mb-4">
+                    <button onclick="copyToClipboard('http://localhost:3000/api/search?q=keyword', this)" class="copy-btn px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <code class="font-mono">GET http://localhost:3000/api/search?q=keyword</code>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-semibold mb-2">Query Parameters:</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <code class="bg-gray-100 px-2 py-1 rounded text-sm mr-2">q</code>
+                            <span class="text-gray-600">(required) - Kata kunci pencarian</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex gap-2 items-center mb-4">
+                    <input type="text" id="search-query" placeholder="Masukkan kata kunci..." class="flex-1 px-4 py-2 border rounded-lg">
+                    <button onclick="testSearch()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                        <i class="fas fa-play"></i> Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Result Modal -->
+        <div id="result-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+                    <h3 class="text-2xl font-bold">API Response</h3>
+                    <button onclick="closeResultModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="result-content" class="p-6">
+                    <div class="code-block p-4 relative">
+                        <button onclick="copyToClipboard(document.getElementById('json-result').textContent, this)" class="copy-btn px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">
+                            <i class="fas fa-copy"></i> Copy JSON
+                        </button>
+                        <pre id="json-result" class="overflow-x-auto text-sm"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        // Copy to clipboard function
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        // Test endpoint
+        async function testEndpoint(endpoint) {
+            const url = API_BASE_URL + endpoint;
+            showResultModal('Loading...');
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                document.getElementById('json-result').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('json-result').textContent = JSON.stringify({
+                    error: error.message
+                }, null, 2);
+            }
+        }
+
+        // Test manhwa detail
+        function testManhwaDetail() {
+            const id = document.getElementById('manhwa-id').value.trim();
+            if (!id) {
+                alert('Please enter manhwa ID');
+                return;
+            }
+            testEndpoint(`/manhwa/${encodeURIComponent(id)}`);
+        }
+
+        // Test search
+        function testSearch() {
+            const query = document.getElementById('search-query').value.trim();
+            if (!query) {
+                alert('Please enter search query');
+                return;
+            }
+            testEndpoint(`/search?q=${encodeURIComponent(query)}`);
+        }
+
+        // Show result modal
+        function showResultModal(content) {
+            const modal = document.getElementById('result-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('json-result').textContent = content;
+        }
+
+        // Close result modal
+        function closeResultModal() {
+            const modal = document.getElementById('result-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('result-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeResultModal();
+            }
+        });
+    </script>
+</body>
+</html>

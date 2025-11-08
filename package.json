@@ -1,0 +1,39 @@
+{
+  "name": "Restful API",
+  "version": "1.0.0",
+  "description": "Komiku manhwa scraper",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "scrape": "node scrapers/list-manhwa.js",
+    "generate": "node scrapers/generate-komiku-list.js",
+    "update-rating": "node scrapers/update-rating-metadata.js",
+    "cf-dev": "wrangler dev",
+    "cf-deploy": "wrangler deploy",
+    "cf-tail": "wrangler tail",
+    "api": "node api/server.js",
+    "api:dev": "nodemon api/server.js",
+    "upload": "node upload-to-supabase.js",
+    "test": "node test-supabase.js"
+  },
+  "keywords": [
+    "scraper",
+    "manhwa",
+    "komiku"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^23.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
