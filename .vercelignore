@@ -1,0 +1,12 @@
+node_modules
+.env
+scrapers
+data
+*.md
+.git
+.gitignore
+test-supabase.js
+upload-to-supabase.js
+start-api.bat
+metadata-example.json
+chapter-detail-example.json
