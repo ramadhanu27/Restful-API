@@ -1,7 +1,22 @@
 {
   "version": 2,
+  "functions": {
+    "api/index.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/(.*)", "destination": "/api" }
+    { "source": "/api/(.*)", "destination": "/api" }
+  ],
+  "routes": [
+    {
+      "src": "/(.*\\.(html|css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "dest": "/api/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api"
+    }
   ]
 }

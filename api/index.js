@@ -28,9 +28,27 @@ app.use('/api/manhwa', manhwaRoutes);
 app.use('/api/chapters', chapterRoutes);
 app.use('/api/search', searchRoutes);
 
-// Root route
+// Root route - serve index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error('Error serving index.html:', err);
+      res.status(404).send('Index page not found');
+    }
+  });
+});
+
+// Serve HTML files
+app.get('/*.html', (req, res) => {
+  const fileName = req.path.substring(1); // Remove leading slash
+  const filePath = path.join(__dirname, 'public', fileName);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error(`Error serving ${fileName}:`, err);
+      res.status(404).send('File not found');
+    }
+  });
 });
 
 // Error handling middleware
